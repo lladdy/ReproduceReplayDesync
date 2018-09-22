@@ -25,7 +25,7 @@ The game will be between two DebugBots who will both issue random commands to th
 It might take a number of runs before the program reproduces the issue.
 On my machine it was commonly less than 10 tries, but never more than 20.
 
-You will know you have produced the issue when you see at least one replay that is significantly larger in file size than the others.
+You will know you have produced the issue when you see at least one replay that is significantly larger in file size (>1MB) than the others.
 
 Once a much larger replay file has been produced, move it over to a windows machine with SC2 installed and view it. You should observe that bot actions either cease part way through or are entirely missing.
 
