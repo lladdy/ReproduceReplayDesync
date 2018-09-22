@@ -3,7 +3,7 @@ file(GLOB SOURCES_DEBUGBOT "*.cpp" "*.h")
 
 # Include directories
 include_directories(SYSTEM
-    ${PROJECT_SOURCE_DIR}/debugbot
+    ${PROJECT_SOURCE_DIR}/src/debugbot
     ${PROJECT_SOURCE_DIR}/s2client-api/include
     ${PROJECT_BINARY_DIR}/s2client-api/generated
 )
