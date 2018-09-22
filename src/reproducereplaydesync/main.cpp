@@ -219,12 +219,8 @@ void StartDebugBot2(unsigned long *ProcessId) {
     {
         std::vector<char *> unix_cmd;
         unix_cmd.push_back(const_cast<char *>("DebugBot"));
-        // Commenting out the following two lines will have DebugBot number 2, which operates within
-        // the slave (read: not server) sc2 instance, do nothing in game.
-        // This causes the replay issue not to appear for some reason.
         unix_cmd.push_back(const_cast<char *>("-d"));
         unix_cmd.push_back(const_cast<char *>("RandomMovement"));
-
         unix_cmd.push_back(const_cast<char *>("--GamePort"));
         unix_cmd.push_back(const_cast<char *>("5678"));
         unix_cmd.push_back(const_cast<char *>("--StartPort"));

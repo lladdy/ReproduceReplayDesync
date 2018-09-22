@@ -28,7 +28,3 @@ On my machine it was commonly less than 10 tries, but never more than 20.
 You will know you have produced the issue when you see at least one replay that is significantly larger in file size (>1MB) than the others.
 
 Once a much larger replay file has been produced, move it over to a windows machine with SC2 installed and view it. You should observe that bot actions either cease part way through or are entirely missing.
-
-## Additional notes
-- I am yet to see a faulty replay produced after a machine restart (though it might simply be that I haven't tried enough times to trigger it).
-- If you go to line 225 of reproducereplaydesync/main.cpp and comment out the 2 lines there and then recompile, you should find that the replay issue is no longer reproduced for whatever reason.
