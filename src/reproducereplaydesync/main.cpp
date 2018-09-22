@@ -387,7 +387,7 @@ sc2::Server server2;
 sc2::Connection client1;
 sc2::Connection client2;
 
-int main(int argc, char **argv) {
+int run(int argc, char **argv) {
 
     // START SERVERS
     std::cout << "START SERVERS" << std::endl;
@@ -547,6 +547,12 @@ int main(int argc, char **argv) {
     {
         std::cout << "Failed to detect end of Bot2 after 20s.  Killing" << std::endl;
         KillBotProcess(Bot2ThreadId);
+    }
+}
+
+int main(int argc, char **argv) {
+    for (int i = 0; i < 20; ++i) {
+        run(argc, argv);
     }
 }
 
