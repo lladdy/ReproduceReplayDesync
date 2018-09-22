@@ -367,6 +367,15 @@ sc2::GameRequestPtr CreateLeaveGameRequest() {
     sc2::ProtoInterface proto;
     sc2::GameRequestPtr request = proto.MakeRequest();
 
+    request->mutable_leave_game();
+
+    return request;
+}
+
+sc2::GameRequestPtr CreateQuitGameRequest() {
+    sc2::ProtoInterface proto;
+    sc2::GameRequestPtr request = proto.MakeRequest();
+
     request->mutable_quit();
 
     return request;
@@ -503,6 +512,29 @@ int run(int argc, char **argv) {
     std::string replayName2 = std::to_string(std::chrono::system_clock::to_time_t(now))
                               + "_2_DebugBot1VsDebugBot2.SC2Replay";
     SaveReplay(&client2, replayName2);
+
+    // LEAVE GAME
+    std::cout << "LEAVE GAME" << std::endl;
+    sc2::SleepFor(1000);
+    if (!SendDataToConnection(&client1, CreateLeaveGameRequest().get())) {
+        std::cout << "CreateLeaveGameRequest failed for Client 1." << std::endl;
+    }
+    sc2::SleepFor(1000);
+    if (!SendDataToConnection(&client2, CreateLeaveGameRequest().get())) {
+        std::cout << "CreateLeaveGameRequest failed for Client 2." << std::endl;
+    }
+
+    // QUIT GAME
+    std::cout << "QUIT GAME" << std::endl;
+    sc2::SleepFor(1000);
+    if (!SendDataToConnection(&client1, CreateQuitGameRequest().get())) {
+        std::cout << "CreateQuitGameRequest failed for Client 1." << std::endl;
+    }
+    sc2::SleepFor(1000);
+    if (!SendDataToConnection(&client2, CreateQuitGameRequest().get())) {
+        std::cout << "CreateQuitGameRequest failed for Client 2." << std::endl;
+    }
+    sc2::SleepFor(1000);
 
     // CLEANUP
     std::cout << "CLEANUP" << std::endl;
