@@ -504,25 +504,6 @@ int run(int argc, char **argv) {
                               + "_2_DebugBot1VsDebugBot2.SC2Replay";
     SaveReplay(&client2, replayName2);
 
-    // LEAVE GAME
-    std::cout << "LEAVE GAME" << std::endl;
-    sc2::SleepFor(1000);
-    if (!SendDataToConnection(&client1, CreateLeaveGameRequest().get())) {
-        std::cout << "CreateLeaveGameRequest failed for Client 1." << std::endl;
-    }
-    sc2::SleepFor(1000);
-    if (!SendDataToConnection(&client2, CreateLeaveGameRequest().get())) {
-        std::cout << "CreateLeaveGameRequest failed for Client 2." << std::endl;
-    }
-    sc2::SleepFor(1000);
-    if (server1.HasRequest() && server1.connections_.size() > 0) {
-        server1.SendRequest(client1.connection_);
-    }
-    sc2::SleepFor(1000);
-    if (server2.HasRequest() && server2.connections_.size() > 0) {
-        server2.SendRequest(client2.connection_);
-    }
-
     // CLEANUP
     std::cout << "CLEANUP" << std::endl;
     sc2::TerminateProcess(Bot1ProcessId);
