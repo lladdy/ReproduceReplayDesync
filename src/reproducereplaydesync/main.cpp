@@ -523,36 +523,15 @@ int run(int argc, char **argv) {
         server2.SendRequest(client2.connection_);
     }
 
-    // END BOTS
-    std::cout << "END BOTS" << std::endl;
-    std::future_status bot1ProgStatus, bot2ProgStatus;
-    auto start = std::chrono::system_clock::now();
-    std::chrono::duration<double> elapsed_seconds;
-    while (elapsed_seconds.count() < 20)
-    {
-        bot1ProgStatus = bot1ProgramThread.wait_for(std::chrono::milliseconds(50));
-        bot2ProgStatus = bot2ProgramThread.wait_for(std::chrono::milliseconds(50));
-        if (bot1ProgStatus == std::future_status::ready && bot2ProgStatus == std::future_status::ready)
-        {
-            break;
-        }
-        elapsed_seconds = std::chrono::system_clock::now() - start;
-    }
-    if (bot1ProgStatus != std::future_status::ready)
-    {
-        std::cout << "Failed to detect end of Bot1 after 20s.  Killing" << std::endl;
-        KillBotProcess(Bot1ThreadId);
-    }
-    if (bot2ProgStatus != std::future_status::ready)
-    {
-        std::cout << "Failed to detect end of Bot2 after 20s.  Killing" << std::endl;
-        KillBotProcess(Bot2ThreadId);
-    }
+    // CLEANUP
+    std::cout << "CLEANUP" << std::endl;
+    sc2::TerminateProcess(Bot1ProcessId);
+    sc2::TerminateProcess(Bot2ProcessId);
+    KillBotProcess(Bot1ThreadId);
+    KillBotProcess(Bot2ThreadId);
 }
 
 int main(int argc, char **argv) {
-    for (int i = 0; i < 20; ++i) {
-        run(argc, argv);
-    }
+    run(argc, argv);
 }
 
