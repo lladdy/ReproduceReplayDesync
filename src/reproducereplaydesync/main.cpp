@@ -530,8 +530,8 @@ int main(int argc, char **argv) {
     std::chrono::duration<double> elapsed_seconds;
     while (elapsed_seconds.count() < 20)
     {
-        bot1ProgStatus = bot1ProgramThread.wait_for(50ms);
-        bot2ProgStatus = bot2ProgramThread.wait_for(50ms);
+        bot1ProgStatus = bot1ProgramThread.wait_for(std::chrono::milliseconds(50));
+        bot2ProgStatus = bot2ProgramThread.wait_for(std::chrono::milliseconds(50));
         if (bot1ProgStatus == std::future_status::ready && bot2ProgStatus == std::future_status::ready)
         {
             break;
