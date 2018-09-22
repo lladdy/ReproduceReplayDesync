@@ -3,7 +3,7 @@
 - An SC2 install with the map AcidPlantLE.SC2Map available (or just change the code to use a map that you have).
 - CMake
 - make
-- A SC2 install on windows for verification 
+- An SC2 install on windows for verification 
 ## Steps
 Clone, build and run this project.
 ```bash
