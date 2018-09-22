@@ -372,6 +372,16 @@ sc2::GameRequestPtr CreateLeaveGameRequest() {
     return request;
 }
 
+void KillBotProcess(unsigned long pid)
+{
+    int ret = kill(pid, SIGKILL);
+    if (ret < 0)
+    {
+        std::cerr << std::string("Failed to send SIGKILL, error:") +
+                     strerror(errno) << std::endl;
+    }
+}
+
 sc2::Server server1;
 sc2::Server server2;
 sc2::Connection client1;
@@ -530,12 +540,12 @@ int main(int argc, char **argv) {
     }
     if (bot1ProgStatus != std::future_status::ready)
     {
-        PrintThread{} << "Failed to detect end of " << Agent1.BotName << " after 20s.  Killing" << std::endl;
+        std::cout << "Failed to detect end of Bot1 after 20s.  Killing" << std::endl;
         KillBotProcess(Bot1ThreadId);
     }
     if (bot2ProgStatus != std::future_status::ready)
     {
-        PrintThread{} << "Failed to detect end of " << Agent2.BotName << " after 20s.  Killing" << std::endl;
+        std::cout << "Failed to detect end of Bot2 after 20s.  Killing" << std::endl;
         KillBotProcess(Bot2ThreadId);
     }
 }
